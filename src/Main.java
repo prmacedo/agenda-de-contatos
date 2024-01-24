@@ -51,6 +51,9 @@ public class Main {
 
             case 2:
                 System.out.println("\nRemover Contato");
+                System.out.print("Informe o Id do Contato: ");
+                Long id = scanner.nextLong();
+                agenda.removeContato(id);
                 break;
 
             case 3:

@@ -48,6 +48,21 @@ public class Agenda {
         return true;
     }
 
+    public void removeContato(Long id) {
+        if (this.listaDeContatos.isEmpty()) {
+            return;
+        }
+
+        for (int i = 0; i < this.listaDeContatos.size(); i++) {
+            Contato currentContato = this.listaDeContatos.get(i);
+
+            if (currentContato.getId().equals(id)) {
+                this.listaDeContatos.remove(i);
+                return;
+            }
+        }
+    }
+
     public void printListaDeContatos() {
         if (this.listaDeContatos.isEmpty()) {
             System.out.println("Agenda de Contatos vazia");
