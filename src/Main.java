@@ -69,7 +69,6 @@ public class Main {
                 break;
         }
 
-        scanner.close();
         return action != 4;
     }
 }
