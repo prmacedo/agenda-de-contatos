@@ -36,55 +36,68 @@ public class Main {
         int action = Integer.parseInt(scanner.nextLine());
 
         switch (action) {
-            case 1:
-                System.out.println("\nAdicionar Contato");
-                System.out.print("Informe o nome: ");
-                String nome = scanner.nextLine();
-                System.out.print("Informe o sobrenome: ");
-                String sobrenome = scanner.nextLine();
-                System.out.println("Informe a lista de telefones separados por vírgula seguindo o modelo: 99 99999999, 88 88888888");
-                String telefonesString = scanner.nextLine();
-
-                agenda.addContato(nome, sobrenome, telefonesString);
-
-                break;
-
-            case 2:
-                System.out.println("\nRemover Contato");
-                System.out.print("Informe o Id do Contato: ");
-                Long id = Long.parseLong(scanner.nextLine());
-                agenda.removeContato(id);
-                break;
-
-            case 3:
-                System.out.println("\nEditar Contato");
-                Long idx = Long.parseLong(scanner.nextLine());
-
-                Contato contatoToEdit = agenda.contatoExists(idx);
-                if (contatoToEdit != null) {
-                    System.out.print("Informe o nome: ");
-                    String nomeX = scanner.nextLine();
-                    System.out.print("Informe o sobrenome: ");
-                    String sobrenomeX = scanner.nextLine();
-                    System.out.println("Informe a lista de telefones separados por vírgula seguindo o modelo: 99 99999999, 88 88888888");
-                    String telefonesStringX = scanner.nextLine();
-
-                    agenda.editContato(contatoToEdit, nomeX, sobrenomeX, telefonesStringX);
-                }
-
-                break;
-
-            case 4:
-                System.out.println("\nSair");
-                break;
-
-            default:
-                System.out.println("\nOpção inválida\n");
-                break;
+            case 1 -> add(agenda);
+            case 2 -> remove(agenda);
+            case 3 -> edit(agenda);
+            case 4 -> exit();
+            default -> System.out.println("\nOpção inválida\n");
         }
 
         return action != 4;
     }
 
+    public static void add(Agenda agenda) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\nAdicionar Contato");
+
+        System.out.print("Informe o nome: ");
+        String nome = scanner.nextLine().trim();
+
+        System.out.print("Informe o sobrenome: ");
+        String sobrenome = scanner.nextLine().trim();
+
+        System.out.println("Informe a lista de telefones separados por vírgula seguindo o modelo: 99 99999999, 88 88888888");
+        String telefonesString = scanner.nextLine().trim();
+
+        agenda.addContato(nome, sobrenome, telefonesString);
+    }
+
+    public static void remove(Agenda agenda) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\nRemover Contato");
+
+        System.out.print("Informe o Id do Contato: ");
+        Long id = Long.parseLong(scanner.nextLine());
+
+        agenda.removeContato(id);
+    }
+
+    public static void edit(Agenda agenda) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\nEditar Contato");
+        System.out.print("Informe o Id do Contato: ");
+        Long id = Long.parseLong(scanner.nextLine());
+
+        Contato contatoToEdit = agenda.contatoExists(id);
+        if (contatoToEdit != null) {
+            System.out.print("Informe o nome: ");
+            String nome = scanner.nextLine().trim();
+
+            System.out.print("Informe o sobrenome: ");
+            String sobrenome = scanner.nextLine().trim();
+
+            System.out.println("Informe a lista de telefones separados por vírgula seguindo o modelo: 99 99999999, 88 88888888");
+            String telefonesString = scanner.nextLine().trim();
+
+            agenda.editContato(contatoToEdit, nome, sobrenome, telefonesString);
+        }
+    }
+
+    public static void exit() {
+        System.out.println("\nSair");
+    }
 
 }
