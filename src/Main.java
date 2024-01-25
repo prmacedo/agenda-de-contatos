@@ -52,12 +52,26 @@ public class Main {
             case 2:
                 System.out.println("\nRemover Contato");
                 System.out.print("Informe o Id do Contato: ");
-                Long id = scanner.nextLong();
+                Long id = Long.parseLong(scanner.nextLine());
                 agenda.removeContato(id);
                 break;
 
             case 3:
                 System.out.println("\nEditar Contato");
+                Long idx = Long.parseLong(scanner.nextLine());
+
+                Contato contatoToEdit = agenda.contatoExists(idx);
+                if (contatoToEdit != null) {
+                    System.out.print("Informe o nome: ");
+                    String nomeX = scanner.nextLine();
+                    System.out.print("Informe o sobrenome: ");
+                    String sobrenomeX = scanner.nextLine();
+                    System.out.println("Informe a lista de telefones separados por vírgula seguindo o modelo: 99 99999999, 88 88888888");
+                    String telefonesStringX = scanner.nextLine();
+
+                    agenda.editContato(contatoToEdit, nomeX, sobrenomeX, telefonesStringX);
+                }
+
                 break;
 
             case 4:
@@ -71,4 +85,6 @@ public class Main {
 
         return action != 4;
     }
+
+
 }

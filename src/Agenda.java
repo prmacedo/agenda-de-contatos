@@ -13,6 +13,20 @@ public class Agenda {
     }
 
     public void addContato(String nome, String sobrenome, String telefonesString) {
+        List<Telefone> telefones = this.generateTelefoneList(telefonesString);
+
+        if (telefones == null) {
+            return;
+        }
+
+        Long currentUserId = ++this.lastContatoId;
+        Contato contato = new Contato(currentUserId, nome, sobrenome);
+        contato.setTelefones(telefones);
+
+        this.listaDeContatos.add(contato);
+    }
+
+    private List<Telefone> generateTelefoneList(String telefonesString) {
         List<Telefone> telefones = new ArrayList<Telefone>();
 
         String[] telefonesStringArray = telefonesString.split(",");
@@ -24,15 +38,11 @@ public class Agenda {
                 telefones.add(telefone);
             } else {
                 System.out.printf("O número %s já pertence a outro contato, informe os dados novamente\n", telefoneString);
-                return;
+                return null;
             }
         }
 
-        Long currentUserId = ++this.lastContatoId;
-        Contato contato = new Contato(currentUserId, nome, sobrenome);
-        contato.setTelefones(telefones);
-
-        this.listaDeContatos.add(contato);
+        return telefones;
     }
 
     private boolean isTelefoneUnique(Telefone telefoneToCheck) {
@@ -63,11 +73,28 @@ public class Agenda {
         }
     }
 
+    public Contato contatoExists(Long id) {
+        for (Contato contato : this.listaDeContatos) {
+            if(contato.getId().equals(id)) {
+                return contato;
+            }
+        }
+
+        return null;
+    }
+
+    public void editContato(Contato contato, String nome, String sobrenome, String telefonesString) {
+        contato.setNome(nome);
+        contato.setSobreNome(sobrenome);
+        contato.setTelefones(this.generateTelefoneList(telefonesString));
+    }
+
     public void printListaDeContatos() {
+        System.out.println(">>>> Contatos <<<<");
+
         if (this.listaDeContatos.isEmpty()) {
             System.out.println("Agenda de Contatos vazia");
         } else {
-            System.out.println(">>>> Contatos <<<<");
             System.out.println("Id | Nome");
 
             for (Contato contato : this.listaDeContatos) {
@@ -79,4 +106,10 @@ public class Agenda {
         System.out.println();
     }
 
+    @Override
+    public String toString() {
+        return "Agenda{" +
+                "listaDeContatos=" + listaDeContatos +
+                '}';
+    }
 }
