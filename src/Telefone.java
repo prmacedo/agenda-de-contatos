@@ -48,7 +48,7 @@ public class Telefone {
 
     @Override
     public String toString() {
-        return "Telefone{" +
+        return "{" +
                 "id=" + id +
                 ", ddd='" + ddd + '\'' +
                 ", numero=" + numero +

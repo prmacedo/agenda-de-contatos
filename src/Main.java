@@ -83,6 +83,8 @@ public class Main {
 
         Contato contatoToEdit = agenda.contatoExists(id);
         if (contatoToEdit != null) {
+            System.out.println(contatoToEdit.toString());
+            
             System.out.print("Informe o nome: ");
             String nome = scanner.nextLine().trim();
 

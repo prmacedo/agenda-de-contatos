@@ -50,7 +50,7 @@ public class Contato {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", sobreNome='" + sobreNome + '\'' +
-                ", telefones=" + telefones +
+                ", Telefones=" + telefones +
                 '}';
     }
 }
